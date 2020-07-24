@@ -2,16 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UrlSchema = new Schema({
-    UserEmail: {
-        type: String,
-        required: true
-    },
     FullUrl: {
         type: String,
         required: true
     },
-    ShortUrl: {
+    ShortUrl:{
         type: String,
+        required:true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    },
+    userid: {
+        type: Object,
         required: true
     }
 });
