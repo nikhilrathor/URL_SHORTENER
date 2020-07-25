@@ -65,13 +65,29 @@ class LoginModal extends Component {
         e.preventDefault();
 
         const { email, password } = this.state;
-
-        const user = {
-            email,
-            password
+        const vaildmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+        let valid = true;
+        if (!email && valid) {
+            this.setState({ msg: 'Email Field Cannot be empty!' })
+            valid = false
         }
+        if (!vaildmail.test(email) && valid) {
+            this.setState({ msg: 'Invalid Email' })
+            valid = false
+        }
+        if (!password && valid) {
+            this.setState({ msg: 'Password field cannot be empty' })
+            valid = false
+        }
+        if (valid) {
+            this.setState({ msg: null });
+            const user = {
+                email,
+                password
+            }
 
-        this.props.login(user);
+            this.props.login(user);
+        }
     }
 
     render() {

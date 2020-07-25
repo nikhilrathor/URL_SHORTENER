@@ -42,8 +42,8 @@ class RegisterModal extends Component {
                 this.setState({ msg: null });
         }
 
-        if(this.state.modal){
-            if(isAuthenticated){
+        if (this.state.modal) {
+            if (isAuthenticated) {
                 this.toggle();
             }
         }
@@ -51,7 +51,7 @@ class RegisterModal extends Component {
     }
 
     toggle = () => {
-        if(this.state.msg)
+        if (this.state.msg)
             this.props.clearErrors();
         this.setState({
             modal: !this.state.modal
@@ -66,15 +66,34 @@ class RegisterModal extends Component {
         e.preventDefault();
 
         const { name, email, password } = this.state;
-
-        const newUser = {
-            name,
-            email,
-            password
+        const vaildmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+        let valid = true;
+        if (!name && valid) {
+            this.setState({ msg: 'Name Field Cannot be empty!' })
+            valid = false
         }
+        if (!email && valid) {
+            this.setState({ msg: 'Email Field Cannot be empty!' })
+            valid = false
+        }
+        if (!vaildmail.test(email) && valid) {
+            this.setState({ msg: 'Invalid Email' })
+            valid = false
+        }
+        if (!password && valid) {
+            this.setState({ msg: 'Password field cannot be empty' })
+            valid = false
+        }
+        if (valid) {
+            this.setState({ msg: null });
+            const newUser = {
+                name,
+                email,
+                password
+            }
 
-        this.props.register(newUser);
-
+            this.props.register(newUser);
+        }
     }
 
     render() {
