@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const urls = require('./routes/api/urls');
 const users = require('./routes/api/users');
-const auth = require('./routes/api/auth');
 const path = require('path');
 const config = require('./config/key');
 
@@ -22,7 +21,6 @@ mongoose.connect(db, {
 
 app.use('/api/urls', urls);
 app.use('/api/users', users);
-app.use('/api/auth', auth);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
