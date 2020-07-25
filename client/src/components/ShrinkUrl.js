@@ -15,7 +15,7 @@ import {
 import { connect } from 'react-redux';
 import { addUrl } from '../actions/urlActions';
 
-class UrlModal extends Component {
+class ShrinkUrl extends Component {
     state = {
         url: '',
         msg: ''
@@ -26,7 +26,7 @@ class UrlModal extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const validUrl = /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/
+        const validUrl = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
         let valid = true;
         if (!validUrl.test(this.state.url) && valid) {
             this.setState({ msg: 'Invalid URL' })
@@ -80,4 +80,4 @@ const mapStateTopProps = state => ({
     user: state.auth.user
 })
 
-export default connect(mapStateTopProps, { addUrl })(UrlModal);
+export default connect(mapStateTopProps, { addUrl })(ShrinkUrl);

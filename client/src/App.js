@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import AppNavbar from './components/AppNavbar';
 import UrlList from './components/UrlList';
-import UrlModal from './components/UrlModal';
+import ShrinkUrl from './components/ShrinkUrl';
 import { Container } from 'reactstrap'
 import { loadUser } from './actions/authActions';
 import { connect } from 'react-redux';
@@ -23,7 +23,7 @@ class App extends Component {
         {
           this.props.isAuthenticated ?
             <Container>
-              <UrlModal />
+              <ShrinkUrl />
               <UrlList />
             </Container>
             : <Alert color="primary">
